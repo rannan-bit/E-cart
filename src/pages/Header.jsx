@@ -4,16 +4,24 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../assets/logo.png'
 import Badge from 'react-bootstrap/Badge'
+import { searchProduct } from '../redux/slice/ProductSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+
 
 
 function Header(insidelanding) {
+  const dispatch=useDispatch()
+  const wishlist=useSelector(state=>state.Wishlist)
+  const cart=useSelector(state=>state.cart)
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary shadow-sm">
         <Container fluid className="px-3 px-lg-5">
 
           {/* Logo + Brand */}
-          <Navbar.Brand href="#" className="d-flex align-items-center">
+          <Link to={'/'} className="d-flex align-items-center text-decoration-none">
             <img
               src={logo}
               alt="Shopify"
@@ -22,7 +30,7 @@ function Header(insidelanding) {
               className="me-2"
             />
             <span className="fw-bold fs-4">Shopify</span>
-          </Navbar.Brand>
+          </Link>
 
           {/* Mobile Toggle */}
           <Navbar.Toggle aria-controls="main-navbar" />
@@ -33,6 +41,7 @@ function Header(insidelanding) {
             {insidelanding && (
               <div className="mx-lg-5 my-3 my-lg-0 flex-grow-1">
                 <input
+                  onChange={(e)=>dispatch(searchProduct(e.target.value))}
                   className="form-control"
                   type="search"
                   placeholder="Search by product name"
@@ -45,6 +54,7 @@ function Header(insidelanding) {
 
               {/* Wishlist */}
               <div className="position-relative">
+                <Link to={`/wishlist`}>
                 <i className="fa-solid fa-heart text-danger fs-4"></i>
 
                 <Badge
@@ -52,12 +62,14 @@ function Header(insidelanding) {
                   pill
                   className="position-absolute top-0 start-100 translate-middle"
                 >
-                  0
-                </Badge>
+                  {wishlist?.length}
+                </Badge></Link>
+                
               </div>
 
               {/* Cart */}
               <div className="position-relative">
+                <Link to={`/cart`}>
                 <i className="fa-solid fa-cart-shopping text-success fs-4"></i>
 
                 <Badge
@@ -65,8 +77,9 @@ function Header(insidelanding) {
                   pill
                   className="position-absolute top-0 start-100 translate-middle"
                 >
-                  0
+                  {cart?.length}
                 </Badge>
+                </Link>
               </div>
 
             </div>

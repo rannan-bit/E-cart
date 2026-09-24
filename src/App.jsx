@@ -22,6 +22,7 @@ function App() {
       <Route path='/product/:id/view' element={<Product/>}/>
       <Route path='/*' element={<Pnf/>}/>
     </Routes>
+    
 
      
     </>
