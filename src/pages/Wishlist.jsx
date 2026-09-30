@@ -30,30 +30,32 @@ function Wishlist() {
   return (
     <div>
       <Header />
-      <div className=' d-flex my-5 mx-5'>
+      <div className='store-page'>
       {
         wishlist?.length > 0 ?
-          wishlist?.map(pro => (
+          <div className='wishlist-grid'>
+          {wishlist?.map(pro => (
             
-              <Card style={{ width: '18rem' }} className='ms-4'>
-                <Card.Img variant="top" src={pro.images} />
+              <Card className='wishlist-card' key={pro.id}>
+                <Card.Img variant="top" src={pro.images} alt={pro.title} />
                 <Card.Body>
                   <Card.Title>{pro.title.slice(0, 10)}</Card.Title>
-                  <div className='d-flex align-items-center justify-content-between'>
-                    <button className='btn' onClick={()=>dispatch(removeFromeWishlist(pro?.id))}>
+                  <div className='wishlist-actions d-flex align-items-center'>
+                    <button className='btn' aria-label={`Remove ${pro.title} from wishlist`} title="Remove from wishlist" onClick={()=>dispatch(removeFromeWishlist(pro?.id))}>
                       <i class="fa-solid fa-heart-circle-xmark text-danger fs-3"></i>
 
                     </button>
-                    <button className='btn' onClick={()=>handleCart(pro)}>
+                    <button className='btn' aria-label={`Add ${pro.title} to cart`} title="Add to cart" onClick={()=>handleCart(pro)}>
                       <i class="fa-solid fa-cart-plus text-success fs-3"></i>
                     </button>
                   </div>
                 </Card.Body>
               </Card>
             
-          ))
+              ))}
+              </div>
           :
-          <div className='d-flex align-items-center justify-content-center' style={{minHeight:'100vh',width:'100%'}}>
+              <div className='wishlist-empty'>
             <img src="https://static.vecteezy.com/system/resources/previews/019/174/358/non_2x/plan-strategic-strategy-tactics-economics-market-abstract-flat-color-icon-template-free-vector.jpg" alt="" width={'40%'} />
           </div>
       }

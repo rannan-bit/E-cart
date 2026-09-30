@@ -50,26 +50,32 @@ function Product() {
     return (
         <div>
             <Header />
-            <Row>
-                <Col>
-                    <img src={product.images} alt="" width={'500px'} />
+            <div className="product-detail">
+            <Row className="align-items-center g-4 g-lg-5">
+                <Col xs={12} md={6}>
+                    <div className="product-image-wrap">
+                    <img src={product.images} alt={product.title} className="product-image" />
+                    </div>
                 </Col>
-                <Col>
+                <Col xs={12} md={6}>
                     <h2 className='my-5'>{product.title}</h2>
-                    <h1 className='text-success'>${product.price}</h1>
-                    <p style={{ textAlign: 'justify' }} className='my-3'>{product.description}</p>
-                    <div className='d-flex align-items-center justify-content-between mt-5'>
-                        <button onClick={handleWishlist} className='btn'>
+                    <h1 className='product-detail-price'>${product.price}</h1>
+                    <p className='product-description my-3'>{product.description}</p>
+                    <div className='product-detail-actions d-flex align-items-center mt-5'>
+                        <button onClick={handleWishlist} className='btn' aria-label="Add to wishlist" title="Add to wishlist">
                             <i className="fa-solid fa-heart-circle-plus text-danger fs-3"></i>
+                            <span>Wishlist</span>
                         </button>
-                        <button className='btn' onClick={handleCart}>
+                        <button className='btn' onClick={handleCart} aria-label="Add to cart" title="Add to cart">
                             <i className="fa-solid fa-cart-plus text-success fs-3"></i>
+                            <span>Add to cart</span>
                         </button>
 
 
                     </div>
                 </Col>
             </Row>
+            </div>
         </div>
     )
 }

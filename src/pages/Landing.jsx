@@ -43,15 +43,15 @@ function Landing() {
                     </div>
                     :
 
-                    <div className="container my-5">
-                        <div className="row g-4">
+                    <div className="store-page">
+                        <div className="row g-4 product-grid">
                             {currentProduct?.length > 0 ? (
                                 currentProduct.map((pro) => (
                                     <div
-                                        className="col-12 col-sm-6 col-md-4 col-lg-3"
+                                        className="col-6 col-md-4 col-lg-3"
                                         key={pro.id}
                                     >
-                                        <Card className="h-100 shadow-sm">
+                                        <Card className="product-card h-100">
                                             <Card.Img
                                                 variant="top"
                                                 src={pro.thumbnail}
@@ -69,7 +69,7 @@ function Landing() {
                                                         : pro.title}
                                                 </Card.Title>
 
-                                                <Card.Text className="fw-bold text-success">
+                                                <Card.Text className="product-price fw-bold">
                                                     ${pro.price}
                                                 </Card.Text>
 

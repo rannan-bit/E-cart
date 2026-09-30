@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-dark text-light text-center py-3 py-sm-4">
+    <footer className="site-footer bg-dark text-light text-center py-3 py-sm-4">
       <div className="container">
         <h5 className="mb-1 fs-6 fs-sm-5">E-Cart</h5>
 

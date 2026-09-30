@@ -17,11 +17,11 @@ function Header(insidelanding) {
   const cart=useSelector(state=>state.cart)
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary shadow-sm">
+      <Navbar expand="lg" className="storefront-nav shadow-sm">
         <Container fluid className="px-3 px-lg-5">
 
           {/* Logo + Brand */}
-          <Link to={'/'} className="d-flex align-items-center text-decoration-none">
+          <Link to={'/'} className="store-brand d-flex align-items-center text-decoration-none">
             <img
               src={logo}
               alt="Shopify"
@@ -29,7 +29,7 @@ function Header(insidelanding) {
               height="45"
               className="me-2"
             />
-            <span className="fw-bold fs-4">Shopify</span>
+            <span className="store-brand-name">Shopify</span>
           </Link>
 
           {/* Mobile Toggle */}
@@ -39,23 +39,25 @@ function Header(insidelanding) {
 
             {/* Search */}
             {insidelanding && (
-              <div className="mx-lg-5 my-3 my-lg-0 flex-grow-1">
+              <div className="store-search mx-lg-5 my-3 my-lg-0 flex-grow-1">
                 <input
                   onChange={(e)=>dispatch(searchProduct(e.target.value))}
                   className="form-control"
                   type="search"
                   placeholder="Search by product name"
+                  aria-label="Search products"
                 />
               </div>
             )}
 
             {/* Wishlist + Cart */}
-            <div className="d-flex align-items-center gap-4">
+            <div className="store-actions d-flex align-items-center">
 
               {/* Wishlist */}
               <div className="position-relative">
-                <Link to={`/wishlist`}>
+                <Link to={`/wishlist`} className="store-action" aria-label={`Wishlist, ${wishlist?.length || 0} items`}>
                 <i className="fa-solid fa-heart text-danger fs-4"></i>
+                <span className="d-none d-sm-inline">Wishlist</span>
 
                 <Badge
                   bg="danger"
@@ -69,8 +71,9 @@ function Header(insidelanding) {
 
               {/* Cart */}
               <div className="position-relative">
-                <Link to={`/cart`}>
+                <Link to={`/cart`} className="store-action" aria-label={`Cart, ${cart?.length || 0} items`}>
                 <i className="fa-solid fa-cart-shopping text-success fs-4"></i>
+                <span className="d-none d-sm-inline">Cart</span>
 
                 <Badge
                   bg="success"
