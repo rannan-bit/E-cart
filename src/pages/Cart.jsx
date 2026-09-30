@@ -30,6 +30,15 @@ function Cart() {
   return (
     <div>
       <Header />
+      <main className="store-page cart-page">
+        <header className="page-heading">
+          <div>
+            <p className="page-eyebrow">Your selections</p>
+            <h1>Shopping cart</h1>
+            <p>Review your items before checkout.</p>
+          </div>
+          {cart?.length > 0 && <div className="page-count"><strong>{cart.length}</strong> items</div>}
+        </header>
       {
         cart?.length > 0 ?
           <div className='cart-layout row g-4'>
@@ -38,12 +47,12 @@ function Cart() {
               <Table striped hover>
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Image</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>...</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"><span className="visually-hidden">Actions</span></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -56,16 +65,16 @@ function Cart() {
                         <td>
                           <div className='d-flex align-items-center'>
                             {
-                              item.quantity>1 && <button className='btn' onClick={()=>dispatch(decrementQuantity(item?.id))}>-</button>
+                              item.quantity>1 && <button className='btn' aria-label={`Decrease ${item.title} quantity`} onClick={()=>dispatch(decrementQuantity(item?.id))}>-</button>
                             }
                             <input style={{ border: 'none',backgroundColor:'transparent' }} type="text" className='cart-quantity' value={item.quantity} readOnly aria-label={`${item.title} quantity`} />
-                            <button className='btn' onClick={()=>dispatch(incrementQuantity(item?.id))}>+</button>
+                            <button className='btn' aria-label={`Increase ${item.title} quantity`} onClick={()=>dispatch(incrementQuantity(item?.id))}>+</button>
                           </div>
                         </td>
                         
                         <td>{item.totalPrice}</td>
                         <td>
-                          <button className='btn' onClick={()=>dispatch(removeFromeCart(item.id))}>
+                          <button className='btn' aria-label={`Remove ${item.title} from cart`} onClick={()=>dispatch(removeFromeCart(item.id))}>
                             <i className="fa-solid fa-trash text-danger"></i>
                           </button>
                         </td>
@@ -81,8 +90,8 @@ function Cart() {
               </Table>
                 </div>
                 <div className='cart-actions'>
-                  <Link to={'/'} className='btn btn-info'>SHOPE MORE</Link>
-                  <button className='btn btn-outline-danger' onClick={()=>dispatch(emptyCart())}>EMPTY CART</button>
+                  <Link to={'/'} className='btn btn-outline-secondary'>Continue shopping</Link>
+                  <button className='btn btn-outline-danger' onClick={()=>dispatch(emptyCart())}>Empty cart</button>
                   
                 </div>
 
@@ -100,11 +109,14 @@ function Cart() {
           </div>
           :
           <div className='cart-empty'>
-            <img src="https://img.freepik.com/premium-vector/shopping-cart-with-cross-mark-wireless-paymant-icon-shopping-bag-failure-paymant-sign-online-shopping-vector_662353-912.jpg" alt="" />
-            <h3>Empty Cart</h3>
+            <span className="empty-state-icon"><i className="fa-solid fa-basket-shopping" aria-hidden="true"></i></span>
+            <h2 className="empty-state-title">Your cart is empty</h2>
+            <p className="empty-state-copy">Items you add will be ready for checkout here.</p>
+            <Link to="/" className="btn btn-primary empty-state-link">Explore products</Link>
 
           </div>
       }
+      </main>
     </div>
   )
 }

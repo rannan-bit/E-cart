@@ -50,7 +50,11 @@ function Product() {
     return (
         <div>
             <Header />
-            <div className="product-detail">
+            <main className="product-detail">
+            <Link to="/" className="product-back-link">
+                <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to products
+            </Link>
             <Row className="align-items-center g-4 g-lg-5">
                 <Col xs={12} md={6}>
                     <div className="product-image-wrap">
@@ -63,11 +67,11 @@ function Product() {
                     <p className='product-description my-3'>{product.description}</p>
                     <div className='product-detail-actions d-flex align-items-center mt-5'>
                         <button onClick={handleWishlist} className='btn' aria-label="Add to wishlist" title="Add to wishlist">
-                            <i className="fa-solid fa-heart-circle-plus text-danger fs-3"></i>
+                            <i className="fa-solid fa-heart-circle-plus text-danger fs-3" aria-hidden="true"></i>
                             <span>Wishlist</span>
                         </button>
                         <button className='btn' onClick={handleCart} aria-label="Add to cart" title="Add to cart">
-                            <i className="fa-solid fa-cart-plus text-success fs-3"></i>
+                            <i className="fa-solid fa-cart-plus text-success fs-3" aria-hidden="true"></i>
                             <span>Add to cart</span>
                         </button>
 
@@ -75,7 +79,7 @@ function Product() {
                     </div>
                 </Col>
             </Row>
-            </div>
+            </main>
         </div>
     )
 }

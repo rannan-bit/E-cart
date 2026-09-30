@@ -37,13 +37,21 @@ function Landing() {
             <Header insidelanding={true} />
             {
                 loading ?
-                    <div className='d-flex justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
-                        <Spinner animation="grow" variant="warning" />
-
+                    <div className="loading-state" role="status">
+                        <Spinner animation="border" variant="success" />
+                        <span>Loading products...</span>
                     </div>
                     :
 
-                    <div className="store-page">
+                    <main className="store-page">
+                        <header className="page-heading">
+                            <div>
+                                <p className="page-eyebrow">The shop</p>
+                                <h1>Shop all products</h1>
+                                <p>Find something you’ll love.</p>
+                            </div>
+                            <div className="page-count"><strong>{allProducts.length}</strong> products</div>
+                        </header>
                         <div className="row g-4 product-grid">
                             {currentProduct?.length > 0 ? (
                                 currentProduct.map((pro) => (
@@ -56,17 +64,11 @@ function Landing() {
                                                 variant="top"
                                                 src={pro.thumbnail}
                                                 className="p-3"
-                                                style={{
-                                                    height: "220px",
-                                                    objectFit: "contain"
-                                                }}
                                             />
 
                                             <Card.Body className="d-flex flex-column">
                                                 <Card.Title>
-                                                    {pro.title.length > 20
-                                                        ? pro.title.slice(0, 20) + "..."
-                                                        : pro.title}
+                                                    {pro.title}
                                                 </Card.Title>
 
                                                 <Card.Text className="product-price fw-bold">
@@ -85,16 +87,18 @@ function Landing() {
                                     </div>
                                 ))
                             ) : (
-                                <p className="text-center fw-bold fs-2">
-                                    No product found!
-                                </p>
+                                <div className="product-empty">
+                                    <span className="empty-state-icon"><i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+                                    <h2 className="empty-state-title">No products found</h2>
+                                    <p className="empty-state-copy">Try a different search to find what you’re looking for.</p>
+                                </div>
                             )}
                         </div>
-                        <div className='text-center my-5'>
+                        <div>
                             <Pagination totalProducts={allProducts?.length} productPerPage={cardPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
 
                         </div>
-                    </div>
+                    </main>
             }
 
 
